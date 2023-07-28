@@ -25,12 +25,9 @@ public class Main {
             for (int li = 0; li < ri; li++){
                 if (list.get(ri) + list.get(li) ==M){
                     cnt++;
-                    //break;
+                    break;
                 }
             }
-            //if (ri==li){
-                //break;
-            //}
         }
         System.out.println(cnt);
     }
