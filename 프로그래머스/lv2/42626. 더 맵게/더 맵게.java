@@ -9,21 +9,12 @@ class Solution {
         
         int answer = 0;
         
-        if (pq.peek()>=K) {
-            return answer;
-        } else {
-            while (pq.peek() < K && pq.size() != 1) {
-                int min = pq.poll();
-                int nextMin = pq.poll();
-                pq.add(min+(nextMin*2));
-                answer++;
-            }
-            if (pq.peek()<K){
-                return -1;
-            } else {
-                return answer;
-            }
-            
+        while (pq.peek() < K && pq.size() != 1) {
+            int min = pq.poll();
+            int nextMin = pq.poll();
+            pq.add(min+(nextMin*2));
+            answer++;
         }
+        return pq.peek()<K ? -1 : answer;
     }   
 }
