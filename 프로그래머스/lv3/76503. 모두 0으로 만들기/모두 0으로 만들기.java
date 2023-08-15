@@ -35,18 +35,10 @@ class Solution {
             }
         }
         Set<Integer> visited2 = new HashSet<>();
-        Set<Integer> leafOfRoot = new HashSet<>();
-        leafOfRoot.add(0);
-        for (int i = 0; i < connection.get(0).size(); i++) {
-            leafOfRoot.add(connection.get(0).get(i));
-        }
 
-        while (order.size() != 0) {
+        while (order.size() > 1) {
             int leafNode = order.pop();
             visited2.add(leafNode);
-            if (leafOfRoot.contains(leafNode)) {
-                continue;
-            }
             for (int i = 0; i < connection.get(leafNode).size(); i++) {
                 if (!visited2.contains(connection.get(leafNode).get(i))) {
                     answerArr[connection.get(leafNode).get(i)] += answerArr[leafNode];
@@ -54,15 +46,8 @@ class Solution {
                 }
             }
         }
-        long leafOfRootWeight = 0;
-        for (int i = 0; i < connection.get(0).size(); i++) {
-            leafOfRootWeight += answerArr[connection.get(0).get(i)];
-        }
-        if (answerArr[0] + leafOfRootWeight == 0) {
-            for (int i = 0; i < connection.get(0).size(); i++) {
-                answer += Math.abs(answerArr[connection.get(0).get(i)]);
-            }
-            return answer;
+        if (answerArr[0] + answerArr[order.peek()] == 0) {
+            return answer + Math.abs(answerArr[order.peek()]);
         } else {
             return -1;
         }
