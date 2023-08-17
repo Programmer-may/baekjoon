@@ -21,7 +21,7 @@ public class Main {
             int num = stack.pop();
             if (K/num > 0){
                 answer += K/num;
-                K = K - ((K/num) * num);
+                K = K % num;
             }
         }
         System.out.println(answer);
