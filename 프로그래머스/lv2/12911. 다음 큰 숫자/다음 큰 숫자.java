@@ -1,9 +1,9 @@
 class Solution {
     public int solution(int n) {
         int answer = 0;
-        int cntZeroOfN = countOne(binaryConversion(n));
+        int cntOneOfN = countOne(binaryConversion(n));
         for (int i = n + 1; i < Integer.MAX_VALUE; i++) {
-            if (countOne(binaryConversion(i)) == cntZeroOfN) {
+            if (countOne(binaryConversion(i)) == cntOneOfN) {
                 answer = i;
                 break;
             }
