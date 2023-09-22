@@ -2,35 +2,20 @@ import java.util.*;
 
 class Solution {
     public int[] solution(String[] wallpaper) {
-        int[][] matrix = new int[wallpaper.length][wallpaper[0].length()];
-        int cnt = 0;
+        int xMax = Integer.MIN_VALUE;
+        int xMin = Integer.MAX_VALUE;
+        int yMax = Integer.MIN_VALUE;
+        int yMin = Integer.MAX_VALUE;
         for (int r = 0; r < wallpaper.length; r++) {
-            String[] str = wallpaper[r].split("");
-            for (int c = 0; c < wallpaper[0].length(); c++) {
-                if (str[c].equals("#")) {
-                    matrix[r][c] = 1;
-                    cnt++;
+            for (int c = 0; c < wallpaper[r].length(); c++) {
+                if (wallpaper[r].charAt(c) == '#') {
+                    if (xMax < c) xMax = c;
+                    if (xMin > c) xMin = c;
+                    if (yMax < r) yMax = r;
+                    if (yMin > r) yMin = r;
                 }
             }
         }
-        int[] xArr = new int[cnt * 2];
-        int[] yArr = new int[cnt * 2];
-        int idx = 0;
-        for (int r = 0; r < matrix.length; r++) {
-            for (int c = 0; c < matrix[0].length; c++) {
-                if (matrix[r][c] == 1) {
-                    xArr[idx] = c;
-                    yArr[idx] = r;
-                    xArr[idx + 1] = c + 1;
-                    yArr[idx + 1] = r + 1;
-                    idx += 2;
-                }
-            }
-        }
-        return new int[]{
-                Arrays.stream(yArr).min().getAsInt(),
-                Arrays.stream(xArr).min().getAsInt(),
-                Arrays.stream(yArr).max().getAsInt(),
-                Arrays.stream(xArr).max().getAsInt()};
+        return new int[]{yMin , xMin ,yMax+1,xMax+1};
     }
 }
