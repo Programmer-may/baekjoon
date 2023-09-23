@@ -6,16 +6,17 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int K = Integer.parseInt(br.readLine());
+        int K  = Integer.parseInt(br.readLine());
         List<Integer> list = new ArrayList<>();
 
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-        for (int i = 0; i < Math.pow(2, K) - 1; i++) {
+        for(int i = 0; i < Math.pow(2,K)-1; i++) {
             int p = Integer.parseInt(st.nextToken());
             list.add(p);
         }
-        Node root = Main.buildTree(list, 0, list.size() - 1);
+
+        Node root = Main.buildTree(list,0,list.size()-1);
         printTree(root);
     }
     static class Node {
@@ -26,21 +27,19 @@ public class Main {
             this.data = data;
         }
     }
-
-    static Node buildTree(List<Integer> list, int start, int end) {
-        if (start > end) {
+    static Node buildTree(List<Integer> list, int start, int end){
+        if (start>end) {
             return null;
         }
-        int rootIdx = (start + end) / 2;
+        int rootIdx = (start+end)/2;
         Node root = new Node(list.get(rootIdx));
-        if (start == end) {
+        if (start==end) {
             return root;
         }
-        root.left = buildTree(list, start, rootIdx - 1);
-        root.right = buildTree(list, rootIdx + 1, end);
+        root.left = buildTree(list,start,rootIdx-1);
+        root.right = buildTree(list,rootIdx+1,end);
         return root;
     }
-
     static void printTree(Node root) {
         StringBuilder sb = new StringBuilder();
 
@@ -48,8 +47,8 @@ public class Main {
         nodeQueue.add(root);
 
         while (!nodeQueue.isEmpty()) {
-            int nodeNumInlevel = nodeQueue.size();
-            for (int i = 0; i < nodeNumInlevel; i++) {
+            int level = nodeQueue.size();
+            for (int i = 0; i<level; i++) {
                 Node node = nodeQueue.poll();
                 sb.append(node.data + " ");
                 if (node.left != null) {
