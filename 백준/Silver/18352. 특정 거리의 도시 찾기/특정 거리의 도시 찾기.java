@@ -50,7 +50,6 @@ public class Main {
                 }
             }
         }
-        /*
         List<Integer> answer = new ArrayList<>();
         for (int i = 1; i <= cityNum; i++) {
             if (dist[i] == goal) {
@@ -63,20 +62,6 @@ public class Main {
         Collections.sort(answer);
         for (int i = 0; i < answer.size(); i++) {
             System.out.println(answer.get(i));
-        }
-         */
-        PriorityQueue<Integer> answer = new PriorityQueue<>();
-        for (int i = 1; i <= cityNum; i++) {
-            if (dist[i] == goal) {
-                answer.add(i);
-            }
-        }
-        if (answer.isEmpty()) {
-            System.out.println(-1);
-        }
-        int range = answer.size();
-        for (int i = 0; i < range; i++) {
-            System.out.println(answer.poll());
         }
     }
 }
