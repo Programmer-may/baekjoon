@@ -2,8 +2,8 @@ class Solution {
     public String solution(String new_id) {
         String answer = new_id.toLowerCase();
         StringBuilder sb = new StringBuilder();
-        //answer = answer.replaceAll("[~!@#$%^&*()=+[{]}:?,<>/]", "")
-        answer = answer.replaceAll("[^0-9a-z-_.]", "")
+        answer = answer.replaceAll("[~!@#$%^&*()=+\\[{\\]}:?,<>/]", "")
+        //answer = answer.replaceAll("[^0-9a-z-_.]", "")
                 .replaceAll("\\.++", ".");
         sb.append(answer);
         if (sb.length() != 0){
