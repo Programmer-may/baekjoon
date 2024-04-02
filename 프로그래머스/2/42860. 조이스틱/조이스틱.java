@@ -1,33 +1,5 @@
 class Solution {
     public int solution(String name) {
-//         int left = 1;
-//         int right = name.length() - 1;
-//         int leftCnt = 0;
-//         int rightCnt = 0;
-//         while (left < right) {
-//             if (name.charAt(left) != 'A') leftCnt++;
-//             if (name.charAt(right) != 'A') rightCnt++;
-//             left++;
-//             right--;
-//         }
-//         int answer = 0;
-//         if (leftCnt <= rightCnt) {
-//             answer += 
-//             for (int i = name.length() - 1; i >= 1; i--) {
-                
-//             }
-            
-//         } else {
-//             for (int i = name.length() - 1; i >= 1; i--) {
-                
-//             }
-//         }
-        
-//         return answer;
-//     }
-//     private int changedFirstLetter() {
-        
-//     }
         int answer = 0;
         int length = name.length();
 
