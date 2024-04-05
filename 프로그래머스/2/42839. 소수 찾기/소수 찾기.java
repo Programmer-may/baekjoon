@@ -1,14 +1,13 @@
 import java.util.*;
 
 class Solution {
-    static char[] check = new char[7];
-    static StringBuilder sb = new StringBuilder();
-    static int answer = 0;
-    static HashMap<Integer,Integer> map = new HashMap<>();
+    char[] check = new char[7];
+    StringBuilder sb = new StringBuilder();
+    int answer = 0;
+    HashMap<Integer,Integer> map = new HashMap<>();
     public int solution(String numbers) {
         char[] numArr = numbers.toCharArray();
         for (int i = 1; i <= numbers.length(); i++) {
-
             dfs(0, i, numArr);
         }
         return answer;
