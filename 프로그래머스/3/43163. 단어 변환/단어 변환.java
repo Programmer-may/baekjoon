@@ -1,55 +1,44 @@
 import java.util.*;
 
 class Solution {
-    class Pair {
-        String word;
-        int steps;
-
-        Pair(String word, int steps) {
-            this.word = word;
-            this.steps = steps;
-        }
-    }
     public int solution(String begin, String target, String[] words) {
-        List<String> wordsList = Arrays.asList(words);
-        if (!wordsList.contains(target)) return 0;
-
-        Queue<Pair> queue = new LinkedList<>();
-        queue.add(new Pair(begin, 0));
-
+        if (!hasTarget(target, words)) return 0;
+        Queue<String> queue = new LinkedList<>();
         Set<String> visited = new HashSet<>();
         visited.add(begin);
-
-        while (!queue.isEmpty()) {
-            Pair current = queue.poll();
-            String currentWord = current.word;
-            int currentSteps = current.steps;
-
-            if (currentWord.equals(target)) {
-                return currentSteps;
-            }
-
-            for (String word : words) {
-                if (!visited.contains(word) && canTransform(currentWord, word)) {
-                    visited.add(word);
-                    queue.add(new Pair(word, currentSteps + 1));
+        int answer = 0;
+        queue.add(begin);
+        while (!queue.isEmpty() || answer <= words.length) {
+            int size = queue.size();
+            for(int i = 0; i < size; i++) {
+                String now = queue.poll();
+                if (now.equals(target)) return answer;
+                for (String word : words) {
+                    if (!visited.contains(word) && isPossible(now, word)) {
+                        queue.add(word);
+                        visited.add(word);
+                    }
                 }
             }
+            answer++;
         }
-
         return 0;
     }
     
-    private boolean canTransform(String word1, String word2) {
-        int difference = 0;
-        for (int i = 0; i < word1.length(); i++) {
-            if (word1.charAt(i) != word2.charAt(i)) {
-                difference++;
-            }
-            if (difference > 1) {
-                return false;
-            }
+    boolean hasTarget(String target, String[] words) {
+        for (String word : words) {
+            if (word.equals(target)) return true;
         }
-        return difference == 1;
+        return false;
+    }
+    
+    boolean isPossible(String before, String after) {
+        int len = before.length();
+        int tmp = 0;
+        for (int i = 0; i < len; i++) {
+            if (before.charAt(i) == after.charAt(i)) tmp++;
+        }
+        if (tmp == len - 1) return true;
+        return false;
     }
 }
