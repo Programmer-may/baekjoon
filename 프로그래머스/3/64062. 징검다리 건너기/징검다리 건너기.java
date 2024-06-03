@@ -3,7 +3,7 @@ import java.util.*;
 class Solution {
     public int solution(int[] stones, int k) {
         Deque<Integer> deque = new LinkedList<>();
-        int maxOfMins = Integer.MAX_VALUE;
+        int minOfMaxs = Integer.MAX_VALUE;
 
         for (int i = 0; i < stones.length; i++) {
             // 현재 슬라이딩 윈도우의 범위 밖의 인덱스를 제거
@@ -21,10 +21,10 @@ class Solution {
 
             // 슬라이딩 윈도우의 크기가 k가 될 때마다 최소값을 업데이트
             if (i >= k - 1) {
-                maxOfMins = Math.min(maxOfMins, stones[deque.peekFirst()]);
+                minOfMaxs = Math.min(minOfMaxs, stones[deque.peekFirst()]);
             }
         }
 
-        return maxOfMins;
+        return minOfMaxs;
     }
 }
