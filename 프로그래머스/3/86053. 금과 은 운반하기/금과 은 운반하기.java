@@ -1,7 +1,7 @@
 class Solution {
-    public static long solution(int a, int b, int[] g, int[] s, int[] w, int[] t) {
+    public long solution(int a, int b, int[] g, int[] s, int[] w, int[] t) {
         long left = 0;
-        long right = 400000000000000L; // 충분히 큰 값으로 초기화
+        long right = 400000000000000L;
         
         while (left < right) {
             long mid = (left + right) / 2;
@@ -15,7 +15,7 @@ class Solution {
         return left;
     }
 
-    private static boolean canDeliver(int a, int b, int[] g, int[] s, int[] w, int[] t, long mid) {
+    private boolean canDeliver(int a, int b, int[] g, int[] s, int[] w, int[] t, long mid) {
         long totalGold = 0;
         long totalSilver = 0;
         long totalWeight = 0;
