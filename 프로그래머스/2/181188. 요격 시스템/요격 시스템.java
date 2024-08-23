@@ -10,8 +10,7 @@ class Solution {
                 currPosition = targets[i][1];
                 answer++;
             }
-        }
-        
+        }     
         return answer;
     }
 }
