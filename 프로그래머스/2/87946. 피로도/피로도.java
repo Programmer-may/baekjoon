@@ -1,9 +1,9 @@
 import java.util.*;
 
 class Solution {
-    static int count = 0;
-    static List<Integer> list = new ArrayList<>();
-
+    int count = 0;
+    List<Integer> list = new ArrayList<>();
+    
     public int solution(int k, int[][] dungeons) {
         boolean[] visited = new boolean[dungeons.length];
         dfs(dungeons, k, 0, visited, 0, dungeons.length, 0);
