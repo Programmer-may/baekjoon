@@ -23,10 +23,10 @@ class Solution {
         for (int i = 0; i < answers.length; i++) {
             int answer = answers[i];
             if ((i % 10 == 0 || i % 10 == 1) && answer == 3) threeStudentAnswerCnt++;
-            if ((i % 10 == 2 || i % 10 == 3) && answer == 1) threeStudentAnswerCnt++;
-            if ((i % 10 == 4 || i % 10 == 5) && answer == 2) threeStudentAnswerCnt++;
-            if ((i % 10 == 6 || i % 10 == 7) && answer == 4) threeStudentAnswerCnt++;
-            if ((i % 10 == 8 || i % 10 == 9) && answer == 5) threeStudentAnswerCnt++;
+            else if ((i % 10 == 2 || i % 10 == 3) && answer == 1) threeStudentAnswerCnt++;
+            else if ((i % 10 == 4 || i % 10 == 5) && answer == 2) threeStudentAnswerCnt++;
+            else if ((i % 10 == 6 || i % 10 == 7) && answer == 4) threeStudentAnswerCnt++;
+            else if ((i % 10 == 8 || i % 10 == 9) && answer == 5) threeStudentAnswerCnt++;
         }
         int maxAnswerCnt = Math.max(oneStudentAnswerCnt, Math.max(twoStudentAnswerCnt, threeStudentAnswerCnt));
         List<Integer> answerList = new ArrayList<>();
