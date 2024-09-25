@@ -1,35 +1,31 @@
-import java.util.*;
 
 class Solution {
-    Map<Integer, Integer> attackMap = new HashMap<>();
+    int continousBandage = 0;
+    int currentHeal;
     public int solution(int[] bandage, int health, int[][] attacks) {
-        int castingTime = bandage[0];
-        int healPerSec = bandage[1];
-        int additionalHeal = bandage[2];
-        int maxTime = attacks[attacks.length - 1][0];
-        for (int[] attack : attacks) {
-            attackMap.put(attack[0], attack[1]);
-            
-        }
-        int time = 1;
-        int currentHealth = health;
-        int continuousBandage = 0;
-        while(time <= maxTime) {
-            if (attackMap.containsKey(time)) {
-                currentHealth -= attackMap.get(time);
-                continuousBandage = 0;
+        int attackIdx = 0;
+        currentHeal = health;
+        for (int time = 1; time <= attacks[attacks.length - 1][0]; time++) {
+            if (time == attacks[attackIdx][0]){
+                currentHeal -= attacks[attackIdx][1];
+                continousBandage = 0;
+                attackIdx++;
             } else {
-                currentHealth += healPerSec;
-                continuousBandage++;
-                if (continuousBandage == castingTime) {
-                    currentHealth += additionalHeal;
-                    continuousBandage = 0;
-                }
-                if (currentHealth >= health) currentHealth = health;
+                currentHeal = heal(bandage, health);
             }
-            if (currentHealth < 0) return -1;
-            time++;
+            if (currentHeal <= 0) return -1;
         }
-        return currentHealth == 0 ? -1 : currentHealth;
+        return currentHeal == 0 ? -1 : currentHeal;
+    }
+    
+    private int heal(int[] bandage, int health) {
+        currentHeal += bandage[1];
+        continousBandage++;
+        if (continousBandage == bandage[0]) {
+            currentHeal += bandage[2];
+            continousBandage = 0;
+        }
+        if (currentHeal >= health) return health;
+        return currentHeal;
     }
 }
