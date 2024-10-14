@@ -2,8 +2,7 @@ import java.util.*;
 
 class Solution {
     int defaultMin, defaultFee, unitTime, unitFee;
-    Map<String, int[]> record = new HashMap<>();
-    TreeSet<String> hasBeen = new TreeSet<>();
+    TreeMap<String, int[]> record = new TreeMap<>();
     public int[] solution(int[] fees, String[] records) {
         init(fees);
         for (String carRecord : records) {
@@ -11,16 +10,16 @@ class Solution {
             if (info[2].equals("IN")) {
                 record.putIfAbsent(info[1], new int[3]);
                 record.get(info[1])[0] = calculateTime(info[0]);
-                hasBeen.add(info[1]);
             } else {
                 record.get(info[1])[1] = calculateTime(info[0]);
                 record.get(info[1])[2] += record.get(info[1])[1] - record.get(info[1])[0];
             }
         }
-        int[] answer = new int[hasBeen.size()];
+        int[] answer = new int[record.size()];
         for (int i = 0; i < answer.length; i++) {
-            String carNum = hasBeen.pollFirst();
-            int[] carRecord = record.get(carNum);
+            Map.Entry<String, int[]> firstEntry = record.pollFirstEntry();
+            String carNum = firstEntry.getKey();
+            int[] carRecord = firstEntry.getValue();
             int entranceTime = carRecord[0];
             int exitTime = carRecord[1];
             int parkingTime = carRecord[2];
