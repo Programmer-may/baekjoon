@@ -1,30 +1,42 @@
 import java.util.*;
 
 class Solution {
-    public int solution(String[][] book_time) {
-        int[][] book_minTime = new int[book_time.length][2];
-        for (int i = 0; i < book_time.length; i++) {
-            String start = book_time[i][0];
-            String end = book_time[i][1];
-            book_minTime[i][0] = covertTime(start);
-            book_minTime[i][1] = covertTime(end);
+    class Book {
+        int start;
+        int end;
+        Book(String[] info) {
+            this.start = convertTime(info[0]);
+            this.end = convertTime(info[1]) + 10;
         }
-        Arrays.sort(book_minTime, (o1, o2) -> o1[0] - o2[0]);
-        PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o1[1] - o2[1]);
-        pq.add(book_minTime[0]);
-        for (int i = 1; i < book_minTime.length; i++) {
-            if (pq.peek()[1] + 10 > book_minTime[i][0]) {
-                pq.add(book_minTime[i]);
+    }
+    public int solution(String[][] book_time) {
+        PriorityQueue<Book> pq = new PriorityQueue<>((a, b) -> a.start - b.start);
+        PriorityQueue<Integer> endTimeList = new PriorityQueue<>();
+        for (String[] arr : book_time) {
+            pq.add(new Book(arr));
+        }
+        int answer = 0;
+        while (!pq.isEmpty()) {
+            Book current = pq.poll();
+            if (endTimeList.isEmpty()) {
+                answer++;
+                endTimeList.add(current.end);
             } else {
-                pq.poll();
-                pq.add(book_minTime[i]);
+                int beforeBookEndTime = endTimeList.peek();
+                if (beforeBookEndTime <= current.start) {
+                    endTimeList.poll();
+                    endTimeList.add(current.end);
+                } else {
+                    answer++;
+                    endTimeList.add(current.end);
+                }
             }
         }
-        return pq.size();
+        return answer;     
     }
-
-    public int covertTime(String str) {
-        String[] arr = str.split(":");
+    
+    private int convertTime(String time) {
+        String[] arr = time.split(":");
         return Integer.parseInt(arr[0]) * 60 + Integer.parseInt(arr[1]);
     }
 }
