@@ -8,10 +8,8 @@ class Solution {
         for (int i = 0; i <= 8; i++) {
             dp.add(new HashSet<>());
         }
-
         // 초기 값을 설정
         dp.get(1).add(N);
-
         for (int i = 2; i <= 8; i++) {
             Set<Integer> currentSet = dp.get(i);
             // N, NN, NNN, NNNN 등과 같은 값을 추가
@@ -33,7 +31,6 @@ class Solution {
                     }
                 }
             }
-
             // 목표 숫자를 찾으면 현재 i를 반환
             if (currentSet.contains(number)) {
                 return i;
