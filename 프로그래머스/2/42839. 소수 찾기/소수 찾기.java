@@ -4,7 +4,7 @@ class Solution {
     char[] check = new char[7];
     StringBuilder sb = new StringBuilder();
     int answer = 0;
-    HashMap<Integer,Integer> map = new HashMap<>();
+    Set<Integer> set = new HashSet<>();
     public int solution(String numbers) {
         char[] numArr = numbers.toCharArray();
         for (int i = 1; i <= numbers.length(); i++) {
@@ -13,11 +13,11 @@ class Solution {
         return answer;
     }
 
-    public void dfs(int lev, int i, char[] numArr) {
+    void dfs(int lev, int i, char[] numArr) {
         if (lev == i) {
             int num = Integer.parseInt(sb.toString());
-            if (isPrimeNumber(num) && !map.containsKey(num)) {
-                map.put(num,1);
+            if (isPrimeNumber(num) && !set.contains(num)) {
+                set.add(num);
                 answer++;
             }
         } else {
@@ -32,8 +32,8 @@ class Solution {
             }
         }
     }
-    public boolean isPrimeNumber(int number) {
-        for (int i = 2; i <= number / 2; i++) {
+    boolean isPrimeNumber(int number) {
+        for (int i = 2; i <= Math.sqrt(number); i++) {
             if (number % i == 0) {
                 return false;
             }
