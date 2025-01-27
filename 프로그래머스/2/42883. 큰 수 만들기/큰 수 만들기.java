@@ -1,8 +1,8 @@
-import java.util.Stack;
+import java.util.*;
 
 class Solution {
     public String solution(String number, int k) {
-        Stack<Character> stack = new Stack<>();
+        Deque<Character> stack = new ArrayDeque<>();
         int keep = number.length() - k;
         
         for (int i = 0; i < number.length(); i++) {
